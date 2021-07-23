@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing_Poker", "Testing_Poker\Testing_Poker.csproj", "{AB8318CF-0F42-4A3B-B876-6DADD1F184E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing_Poker", "Testing_Poker\Testing_Poker.csproj", "{B54B9854-C9FA-47B7-BC7E-6AAF8A8C0F2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing_Poker.Tests", "Testing_Poker.Tests\Testing_Poker.Tests.csproj", "{9240F83B-D4A3-4B1E-A725-1BAF89A279E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AB8318CF-0F42-4A3B-B876-6DADD1F184E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB8318CF-0F42-4A3B-B876-6DADD1F184E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB8318CF-0F42-4A3B-B876-6DADD1F184E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB8318CF-0F42-4A3B-B876-6DADD1F184E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B54B9854-C9FA-47B7-BC7E-6AAF8A8C0F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B54B9854-C9FA-47B7-BC7E-6AAF8A8C0F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B54B9854-C9FA-47B7-BC7E-6AAF8A8C0F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B54B9854-C9FA-47B7-BC7E-6AAF8A8C0F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9240F83B-D4A3-4B1E-A725-1BAF89A279E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9240F83B-D4A3-4B1E-A725-1BAF89A279E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9240F83B-D4A3-4B1E-A725-1BAF89A279E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9240F83B-D4A3-4B1E-A725-1BAF89A279E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
