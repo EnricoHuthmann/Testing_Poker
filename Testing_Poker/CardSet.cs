@@ -10,6 +10,8 @@ namespace Testing_Poker
     {
         private HashSet<KeyValuePair<string, int>> cardSet;
 
+        private HashSet<KeyValuePair<string, int>>? twoPairsSubSet = null;
+
         public CardSet(string[] givenCards)
         {
             cardSet = new HashSet<KeyValuePair<string, int>>();
@@ -37,6 +39,28 @@ namespace Testing_Poker
                 }
             }
             return false;
+        }
+
+        public HashSet<KeyValuePair<string, int>>? GetTwoPairs()
+        {
+            var cardSetArray = cardSet.ToArray();
+
+            for (int i = 0; i < cardSetArray.Length - 1; i++)
+            {
+                for (int j = cardSetArray.Length - 1; j > i; j--)
+                {
+                    if (cardSetArray[i].Value == cardSetArray[j].Value)
+                    {
+                        if (twoPairsSubSet == null)
+                        {
+                            twoPairsSubSet = new HashSet<KeyValuePair<string, int>>();
+                        }
+                        twoPairsSubSet.Add(cardSetArray[i]);
+                        twoPairsSubSet.Add(cardSetArray[j]);
+                    }
+                }
+            }
+            return twoPairsSubSet;
         }
     }
 }
