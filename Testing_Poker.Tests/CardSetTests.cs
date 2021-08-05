@@ -187,7 +187,9 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new object[] { new string[] { }, null })]
-        public void GetTwoPairs_ReturnsNull_WhenNoCardsAreGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        public void GetTwoPairs_ReturnsNull_WhenNoCardsAreGiven(
+            string[] givenCards, 
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -201,7 +203,9 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new object[] { new string[] { "" }, null })]
-        public void GetTwoPairs_ReturnsNull_WhenAnEmptyCardIsGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        public void GetTwoPairs_ReturnsNull_WhenAnEmptyCardIsGiven(
+            string[] givenCards,
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -215,7 +219,9 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new object[] { new string[] { "", "" }, null })]
-        public void GetTwoPairs_ReturnsNull_WhenDuplicateEmptyCardsAreGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        public void GetTwoPairs_ReturnsNull_WhenDuplicateEmptyCardsAreGiven(
+            string[] givenCards, 
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -229,7 +235,9 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new object[] { new string[] { "   " }, null })]
-        public void GetTwoPairs_ReturnsNull_WhenAWhitespaceCardIsGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        public void GetTwoPairs_ReturnsNull_WhenAWhitespaceCardIsGiven(
+            string[] givenCards, 
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -243,7 +251,9 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new object[] { new string[] { "   ", "   " }, null })]
-        public void GetTwoPairs_ReturnsNull_WhenDuplicateWhitespaceCardsAreGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        public void GetTwoPairs_ReturnsNull_WhenDuplicateWhitespaceCardsAreGiven(
+            string[] givenCards, 
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -257,7 +267,9 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new object[] { new string[] { "Not a Card" }, null })]
-        public void GetTwoPairs_ReturnsNull_WhenNonsenseIsGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        public void GetTwoPairs_ReturnsNull_WhenNonsenseIsGiven(
+            string[] givenCards, 
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -271,7 +283,9 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new object[] { new string[] { "Not a Card", "Not a Card" }, null })]
-        public void GetTwoPairs_ReturnsNull_WhenDuplicateNonsenseIsGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        public void GetTwoPairs_ReturnsNull_WhenDuplicateNonsenseIsGiven(
+            string[] givenCards, 
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -285,7 +299,9 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new object[] { new string[] { "H2" }, null })]
-        public void GetTwoPairs_ReturnsNull_WhenNoPairIsGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        public void GetTwoPairs_ReturnsNull_WhenNoPairIsGiven(
+            string[] givenCards, 
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -298,10 +314,19 @@ namespace Testing_Poker.Tests
         }
 
         [Theory]
-        [InlineData(new object[] { new string[] { "H2", "C2" }, new HashSet<KeyValuePair<string, int>>? { new KeyValuePair<string, int> { "", 1 }, new KeyValuePair<string, int> { "", 1} } })]
-        public void GetTwoPairs_Returns_WhenOnePairIsGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        [InlineData(
+            new object[] { new string[] { "H2", "C2" },
+            new HashSet<KeyValuePair<string, int>>
+            { 
+                new KeyValuePair<string, int>("", 1), 
+                new KeyValuePair<string, int>("", 1) 
+            } 
+        })]
+        public void GetTwoPairs_ReturnsHashSet_ConsistingOfOnlyPairs_WhenOnePairIsGiven(
+            string[] givenCards, 
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
-            // Arrange
+            // Arrange 
             var sut = new CardSet(givenCards);
 
             // Act
@@ -312,12 +337,21 @@ namespace Testing_Poker.Tests
         }
 
         [Theory]
-        [InlineData(new object[] { new string[] { "H2", "C2", "SA" }, true })]
-        public void CheckForTwoPair_ReturnsTrue_WhenCardsIncludingOnePairAreGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        [InlineData(
+            new object[] { new string[] { "H2", "C2", "SA" }, 
+            new HashSet<KeyValuePair<string, int>>? 
+            { 
+                new KeyValuePair<string, int> { "", 1 }, 
+                new KeyValuePair<string, int> { "", 1 } 
+            } 
+        })]
+        public void CheckForTwoPair_ReturnsHashSet_ConsistingOfOnlyPairs_WhenCardsIncludingOnePairAreGiven(
+            string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn
+            )
         {
             // Arrange
             var sut = new CardSet(givenCards);
-
+            
             // Act
             var result = sut.GetTwoPairs();
 
@@ -327,7 +361,9 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new object[] { new string[] { "H2", "C8", "SA" }, null })]
-        public void GetTwoPairs_ReturnsNull_WhenCardsWithoutOnePairAreGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        public void GetTwoPairs_ReturnsNull_WhenCardsWithoutOnePairAreGiven(
+            string[] givenCards, 
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -340,8 +376,16 @@ namespace Testing_Poker.Tests
         }
 
         [Theory]
-        [InlineData(new object[] { new string[] { "H2", "C2", "SA", "DA" }, true })]
-        public void CheckForTwoPair_ReturnsTrue_WhenCardsWithTwoPairsAreGiven(string[] givenCards, HashSet<KeyValuePair<string, int>>? expectedReturn)
+        [InlineData(
+            new object[] { new string[] { "H2", "C2", "SA", "DA" }, 
+            new HashSet<KeyValuePair<string, int>>?
+            {
+                new KeyValuePair<string, int> { "", 1 },
+                new KeyValuePair<string, int> { "", 1 }
+            }  })]
+        public void CheckForTwoPair_ReturnsTrue_WhenCardsWithTwoPairsAreGiven(
+            string[] givenCards, 
+            HashSet<KeyValuePair<string, int>>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
