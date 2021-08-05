@@ -25,7 +25,7 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData("   ", false)]
-        public void CheckInput_ReturnsFalse_WhenInputIsAnEmptyString(string inputData, bool expectedReturn)
+        public void CheckInput_ReturnsFalse_WhenInputIsAWhitespaceOnlyString(string inputData, bool expectedReturn)
         {
             // Arrange
             var sut = new InputValidator();
