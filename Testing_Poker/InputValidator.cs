@@ -33,7 +33,7 @@ namespace Testing_Poker
             if (inputCards.Length < minAmountOfCards || inputCards.Length > maxAmountOfCards)
             {
                 return false;
-            }
+            }  
 
             var deckOfCards = new DeckOfCards().deckOfCards;
             var cardSet = new HashSet<string>();
