@@ -4,7 +4,7 @@ using Xunit;
 namespace Testing_Poker.Tests
 {
     public class CardSetTests
-    {       
+    {
 
         public CardSetTests()
         {
@@ -13,7 +13,7 @@ namespace Testing_Poker.Tests
         [Theory]
         [InlineData(new string[] { }, null)]
         public void GetPairs_ReturnsNull_WhenNoCardsAreGiven(
-            string[] givenCards, 
+            string[] givenCards,
             List<Pair>? expectedReturn)
         {
             // Arrange
@@ -121,7 +121,7 @@ namespace Testing_Poker.Tests
             // Assert
             Assert.Equal(expectedReturn, result);
         }
-         
+
         [Theory]
         [InlineData(new string[] { "H2" }, null)]
         public void GetPairs_ReturnsNull_WhenNoPairIsGiven(
@@ -177,7 +177,7 @@ namespace Testing_Poker.Tests
         }
 
         [Theory]
-            [InlineData(
+        [InlineData(
             new string[] { "H3", "C3", "SA" },
             new string[] { "H3", "C3" },
             new int[] { 3, 3 }
@@ -202,7 +202,7 @@ namespace Testing_Poker.Tests
             var expectedReturn = listOfExpectedPairs;
 
             var sut = new CardSet(givenCards);
-            
+
             // Act
             var result = sut.GetPairs();
 
@@ -234,7 +234,7 @@ namespace Testing_Poker.Tests
         [InlineData(
             new string[] { "H2", "C2", "SA", "DA" },
             new string[] { "H2", "C2", "SA", "DA" },
-            new int[] { 2, 2, 14, 14}
+            new int[] { 2, 2, 14, 14 }
         )]
         public void GetPairs_ReturnsListOfPairs_HoldingTwoPairs_WhenTwoPairsAreGiven(
             string[] givenCards,
@@ -276,7 +276,7 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(
-            new string[] { "H2", "H9", "SA", "C2", "SA", "D8", "DA" },
+            new string[] { "H2", "H9", "SA", "C2", "D8", "DA" },
             new string[] { "H2", "C2", "SA", "DA" },
             new int[] { 2, 2, 14, 14 }
         )]
@@ -301,6 +301,59 @@ namespace Testing_Poker.Tests
             {
                 expectedPair1,
                 expectedPair2
+            };
+
+            var expectedReturn = listOfExpectedPairs;
+
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetPairs();
+
+            // Assert
+            for (int i = 0; i < listOfExpectedPairs.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H2", "H9", "SA", "C2", "D2" },
+            new string[] { "H2", "C2", "D2" },
+            new int[] { 2 }
+        )]
+        public void GetPairs_ReturnsListOfPairs_HoldingThreePairs_WhenThreeCardsOfTheSameValueAreGiven(
+            string[] givenCards,
+            string[] expectedCards,
+            int[] expectedValues)
+        {
+            // Arrange
+            Pair expectedPair1 = new(
+                new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
+                }
+            );
+            Pair expectedPair2 = new(
+                new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                }
+            );
+            Pair expectedPair3 = new(
+                new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
+                }
+            );
+
+            List<Pair>? listOfExpectedPairs = new()
+            {
+                expectedPair1,
+                expectedPair2,
+                expectedPair3
             };
 
             var expectedReturn = listOfExpectedPairs;
