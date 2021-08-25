@@ -12,7 +12,7 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new string[] { }, null)]
-        public void GetTwoPairs_ReturnsNull_WhenNoCardsAreGiven(
+        public void GetPairs_ReturnsNull_WhenNoCardsAreGiven(
             string[] givenCards, 
             List<Pair>? expectedReturn)
         {
@@ -20,7 +20,7 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
             Assert.Equal(expectedReturn, result);
@@ -28,7 +28,7 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new string[] { "" }, null)]
-        public void GetTwoPairs_ReturnsNull_WhenAnEmptyCardIsGiven(
+        public void GetPairs_ReturnsNull_WhenAnEmptyCardIsGiven(
             string[] givenCards,
             List<Pair>? expectedReturn)
         {
@@ -36,7 +36,7 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
             Assert.Equal(expectedReturn, result);
@@ -44,7 +44,7 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new string[] { "", "" }, null)]
-        public void GetTwoPairs_ReturnsNull_WhenDuplicateEmptyCardsAreGiven(
+        public void GetPairs_ReturnsNull_WhenDuplicateEmptyCardsAreGiven(
             string[] givenCards,
             List<Pair>? expectedReturn)
         {
@@ -52,7 +52,7 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
             Assert.Equal(expectedReturn, result);
@@ -60,7 +60,7 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new string[] { "   " }, null)]
-        public void GetTwoPairs_ReturnsNull_WhenAWhitespaceCardIsGiven(
+        public void GetPairs_ReturnsNull_WhenAWhitespaceCardIsGiven(
             string[] givenCards,
             List<Pair>? expectedReturn)
         {
@@ -68,7 +68,7 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
             Assert.Equal(expectedReturn, result);
@@ -76,7 +76,7 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new string[] { "   ", "   " }, null)]
-        public void GetTwoPairs_ReturnsNull_WhenDuplicateWhitespaceCardsAreGiven(
+        public void GetPairs_ReturnsNull_WhenDuplicateWhitespaceCardsAreGiven(
             string[] givenCards,
             List<Pair>? expectedReturn)
         {
@@ -84,7 +84,7 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
             Assert.Equal(expectedReturn, result);
@@ -92,7 +92,7 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new string[] { "Not a Card" }, null)]
-        public void GetTwoPairs_ReturnsNull_WhenNonsenseIsGiven(
+        public void GetPairs_ReturnsNull_WhenNonsenseIsGiven(
             string[] givenCards,
             List<Pair>? expectedReturn)
         {
@@ -100,7 +100,7 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
             Assert.Equal(expectedReturn, result);
@@ -108,7 +108,7 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new string[] { "Not a Card", "Not a Card" }, null)]
-        public void GetTwoPairs_ReturnsNull_WhenDuplicateNonsenseIsGiven(
+        public void GetPairs_ReturnsNull_WhenDuplicateNonsenseIsGiven(
             string[] givenCards,
             List<Pair>? expectedReturn)
         {
@@ -116,7 +116,7 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
             Assert.Equal(expectedReturn, result);
@@ -124,7 +124,7 @@ namespace Testing_Poker.Tests
          
         [Theory]
         [InlineData(new string[] { "H2" }, null)]
-        public void GetTwoPairs_ReturnsNull_WhenNoPairIsGiven(
+        public void GetPairs_ReturnsNull_WhenNoPairIsGiven(
             string[] givenCards,
             List<Pair>? expectedReturn)
         {
@@ -132,7 +132,7 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
             Assert.Equal(expectedReturn, result);
@@ -144,7 +144,7 @@ namespace Testing_Poker.Tests
             new string[] { "H2", "C2" },
             new int[] { 2, 2 }
         )]
-        public void GetTwoPairs_ReturnsListOfPairs_HoldingOnePair_WhenOnePairIsGiven(
+        public void GetPairs_ReturnsListOfPairs_HoldingOnePair_WhenOnePairIsGiven(
             string[] givenCards,
             string[] expectedCards,
             int[] expectedValues)
@@ -166,10 +166,14 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
-            Assert.Equal(expectedReturn, result);
+            for (int i = 0; i < listOfExpectedPairs.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
         }
 
         [Theory]
@@ -178,7 +182,7 @@ namespace Testing_Poker.Tests
             new string[] { "H3", "C3" },
             new int[] { 3, 3 }
         )]
-        public void GetTwoPairs_ReturnsListOfPairs_HoldingOnePair_WhenCardsIncludingOnePairAreGiven(
+        public void GetPairs_ReturnsListOfPairs_HoldingOnePair_WhenCardsIncludingOnePairAreGiven(
             string[] givenCards,
             string[] expectedCards,
             int[] expectedValues)
@@ -200,15 +204,19 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
             
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
-            Assert.Equal(expectedReturn, result);
+            for (int i = 0; i < listOfExpectedPairs.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
         }
 
         [Theory]
         [InlineData(new string[] { "H2", "C8", "SA" }, null)]
-        public void GetTwoPairs_ReturnsNull_WhenCardsWithoutOnePairAreGiven(
+        public void GetPairs_ReturnsNull_WhenCardsWithoutOnePairAreGiven(
             string[] givenCards,
             List<Pair>? expectedReturn)
         {
@@ -216,7 +224,7 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
             Assert.Equal(expectedReturn, result);
@@ -228,7 +236,7 @@ namespace Testing_Poker.Tests
             new string[] { "H2", "C2", "SA", "DA" },
             new int[] { 2, 2, 14, 14}
         )]
-        public void GetTwoPairs_ReturnsListOfPairs_HoldingTwoPairs_WhenTwoPairsAreGiven(
+        public void GetPairs_ReturnsListOfPairs_HoldingTwoPairs_WhenTwoPairsAreGiven(
             string[] givenCards,
             string[] expectedCards,
             int[] expectedValues)
@@ -256,10 +264,14 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
-            Assert.Equal(expectedReturn, result);
+            for (int i = 0; i < listOfExpectedPairs.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
         }
 
         [Theory]
@@ -268,7 +280,7 @@ namespace Testing_Poker.Tests
             new string[] { "H2", "C2", "SA", "DA" },
             new int[] { 2, 2, 14, 14 }
         )]
-        public void GetTwoPairs_ReturnsListOfPairs_HoldingTwoPairs_WhenCardsIncludingTwoPairsAreGiven(
+        public void GetPairs_ReturnsListOfPairs_HoldingTwoPairs_WhenCardsIncludingTwoPairsAreGiven(
             string[] givenCards,
             string[] expectedCards,
             int[] expectedValues)
@@ -296,10 +308,14 @@ namespace Testing_Poker.Tests
             var sut = new CardSet(givenCards);
 
             // Act
-            var result = sut.GetTwoPairs();
+            var result = sut.GetPairs();
 
             // Assert
-            Assert.Equal(expectedReturn, result);
+            for (int i = 0; i < listOfExpectedPairs.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
         }
     }
 }

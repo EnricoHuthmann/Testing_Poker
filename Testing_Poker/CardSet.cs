@@ -22,7 +22,7 @@ namespace Testing_Poker
             }
         }
 
-        public List<Pair>? GetTwoPairs()
+        public List<Pair>? GetPairs()
         {
             List<Pair>? pairs = null;
 
