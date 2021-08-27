@@ -8,14 +8,16 @@ namespace Testing_Poker
 {
     public class CardSet
     {
-        private HashSet<KeyValuePair<string, int>> cardSet;
+        private HashSet<KeyValuePair<string, int>>? cardSet;
 
         public CardSet(string[] givenCards)
         {
-            cardSet = new HashSet<KeyValuePair<string, int>>();
+            cardSet = null;
 
             foreach (var card in givenCards)
             {
+                if (cardSet == null) cardSet = new();
+
                 var deckOfCards = new DeckOfCards().deckOfCards;
                 deckOfCards.TryGetValue(card, out int valueOfCard);
                 cardSet.Add(new KeyValuePair<string, int>(card, valueOfCard));
@@ -24,6 +26,8 @@ namespace Testing_Poker
 
         public List<Pair>? GetPairs()
         {
+            if (cardSet == null) return null;
+
             List<Pair>? pairs = null;
 
             var cardSetArray = cardSet.ToArray();
