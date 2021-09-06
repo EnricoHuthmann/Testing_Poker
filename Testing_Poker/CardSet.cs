@@ -48,5 +48,42 @@ namespace Testing_Poker
             }
             return pairs;
         }
+
+        public List<ThreeOfAKind>? GetThreeOfAKind()
+        {
+            if (cardSet == null) return null;
+
+            List<ThreeOfAKind>? listOfThreeOfAKind = null;
+
+            bool hasFoundPair;
+
+            var foundPairCard = new KeyValuePair<string, int>();
+
+            var cardSetArray = cardSet.ToArray();
+
+            for (int i = 0; i < cardSetArray.Length - 1; i++)
+            {
+                hasFoundPair = false;
+                for (int j = cardSetArray.Length - 1; j > i; j--)
+                {
+                    if (cardSetArray[i].Value == cardSetArray[j].Value)
+                    {
+                        if (!hasFoundPair)
+                        {
+                            hasFoundPair = true;
+                            foundPairCard = cardSetArray[j];
+                            continue;
+                        }
+
+                        if (listOfThreeOfAKind == null)
+                        {
+                            listOfThreeOfAKind = new();
+                        }
+                        listOfThreeOfAKind.Add(new ThreeOfAKind(new HashSet<KeyValuePair<string, int>> { cardSetArray[i], foundPairCard, cardSetArray[j] }));
+                    }
+                }
+            }
+            return listOfThreeOfAKind;
+        }
     }
 }
