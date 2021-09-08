@@ -55,31 +55,26 @@ namespace Testing_Poker
 
             List<ThreeOfAKind>? listOfThreeOfAKind = null;
 
-            bool hasFoundPair;
-
-            var foundPairCard = new KeyValuePair<string, int>();
-
             var cardSetArray = cardSet.ToArray();
 
-            for (int i = 0; i < cardSetArray.Length - 1; i++)
-            {
-                hasFoundPair = false;
-                for (int j = cardSetArray.Length - 1; j > i; j--)
-                {
-                    if (cardSetArray[i].Value == cardSetArray[j].Value)
-                    {
-                        if (!hasFoundPair)
-                        {
-                            hasFoundPair = true;
-                            foundPairCard = cardSetArray[j];
-                            continue;
-                        }
+            var lastIndex = cardSetArray.Length - 1;
 
-                        if (listOfThreeOfAKind == null)
+            for (int i = 0; i < lastIndex; i++)
+            {
+                for (int j = lastIndex; j > i; j--)
+                {
+                    if (cardSetArray[i].Value != cardSetArray[j].Value) continue;
+                    
+                    for (int k = 1; k < j; k++)
+                    {
+                        if (cardSetArray[i].Value == cardSetArray[k].Value)
                         {
-                            listOfThreeOfAKind = new();
+                            if (listOfThreeOfAKind == null)
+                            {
+                                listOfThreeOfAKind = new();
+                            }
+                            listOfThreeOfAKind.Add(new ThreeOfAKind(new HashSet<KeyValuePair<string, int>> { cardSetArray[i], cardSetArray[j], cardSetArray[k] }));
                         }
-                        listOfThreeOfAKind.Add(new ThreeOfAKind(new HashSet<KeyValuePair<string, int>> { cardSetArray[i], foundPairCard, cardSetArray[j] }));
                     }
                 }
             }

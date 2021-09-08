@@ -646,7 +646,7 @@ namespace Testing_Poker.Tests
         [Theory]
         [InlineData(
             new string[] { "H2", "H9", "SA", "C2", "D8", "DA", "S2", "HA" },
-            new string[] { "H2", "C2", "S2", "HA", "SA", "DA" },
+            new string[] { "H2", "C2", "S2", "SA", "DA", "HA" },
             new int[] { 2, 14 }
         )]
         public void GetThreeOfAKind_ReturnsListOfThreeOfAKind_HoldingTwoThreeOfAKind_WhenCardsIncludingTwoThreeOfAKindAreGiven(
