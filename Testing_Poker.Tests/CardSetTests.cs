@@ -705,14 +705,14 @@ namespace Testing_Poker.Tests
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
-                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 }
             );
             ThreeOfAKind expectedThreeOfAKind2 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
-                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
                 }
             );
             ThreeOfAKind expectedThreeOfAKind3 = new(
