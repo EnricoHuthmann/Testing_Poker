@@ -80,5 +80,51 @@ namespace Testing_Poker
             }
             return listOfThreeOfAKind;
         }
+
+        public List<FourOfAKind>? GetFourOfAKind()
+        {
+            if (cardSet == null) return null;
+
+            List<FourOfAKind>? listOfFourOfAKind = null;
+
+            var cardSetArray = cardSet.ToArray();
+
+            var lastIndex = cardSetArray.Length - 1;
+
+            for (int i = 0; i < lastIndex; i++)
+            {
+                for (int j = lastIndex; j > i; j--)
+                {
+                    if (cardSetArray[i].Value != cardSetArray[j].Value) continue;
+
+                    for (int k = j - 1; k > i; k--)
+                    {
+                        if (cardSetArray[i].Value != cardSetArray[k].Value) continue;
+
+                        for (int l = i + 1; l < j; l++)
+                        {
+                            if (cardSetArray[i].Value != cardSetArray[l].Value) continue;
+                            
+                            if (listOfFourOfAKind == null)
+                            {
+                                listOfFourOfAKind = new();
+                            }
+                            listOfFourOfAKind.Add(
+                                new FourOfAKind(
+                                    new HashSet<KeyValuePair<string, int>>
+                                    {
+                                        cardSetArray[i],
+                                        cardSetArray[j],
+                                        cardSetArray[k],
+                                        cardSetArray[l]
+                                    }
+                                )
+                            );
+                        }
+                    }                    
+                }
+            }
+            return listOfFourOfAKind;
+        }
     }
 }

@@ -752,5 +752,329 @@ namespace Testing_Poker.Tests
                 Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
             }
         }
+
+        //
+        // Four of a kind
+        //
+
+        [Theory]
+        [InlineData(new string[] { }, null)]
+        public void GetFourOfAKind_ReturnsNull_WhenNoCardsAreGiven(
+            string[] givenCards,
+            List<FourOfAKind>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            Assert.Equal(expectedReturn, result);
+        }
+
+        [Theory]
+        [InlineData(new string[] { "" }, null)]
+        public void GetFourOfAKind_ReturnsNull_WhenAnEmptyCardIsGiven(
+            string[] givenCards,
+            List<FourOfAKind>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            Assert.Equal(expectedReturn, result);
+        }
+
+        [Theory]
+        [InlineData(new string[] { "", "", "", "" }, null)]
+        public void GetFourOfAKind_ReturnsNull_WhenMultipleEmptyCardsAreGiven(
+            string[] givenCards,
+            List<FourOfAKind>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            Assert.Equal(expectedReturn, result);
+        }
+
+        [Theory]
+        [InlineData(new string[] { "   " }, null)]
+        public void GetFourOfAKind_ReturnsNull_WhenAWhitespaceCardIsGiven(
+            string[] givenCards,
+            List<FourOfAKind>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            Assert.Equal(expectedReturn, result);
+        }
+
+        [Theory]
+        [InlineData(new string[] { "   ", "   ", "   ", "   " }, null)]
+        public void GetFourOfAKind_ReturnsNull_WhenMultipleWhitespaceCardsAreGiven(
+            string[] givenCards,
+            List<FourOfAKind>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            Assert.Equal(expectedReturn, result);
+        }
+
+        [Theory]
+        [InlineData(new string[] { "Not a Card" }, null)]
+        public void GetFourOfAKind_ReturnsNull_WhenNonsenseIsGiven(
+            string[] givenCards,
+            List<FourOfAKind>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            Assert.Equal(expectedReturn, result);
+        }
+
+        [Theory]
+        [InlineData(new string[] { "Not a Card", "Not a Card", "Not a Card", "Not a Card" }, null)]
+        public void GetFourOfAKind_ReturnsNull_WhenMultipleNonsenseIsGiven(
+            string[] givenCards,
+            List<FourOfAKind>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            Assert.Equal(expectedReturn, result);
+        }
+
+        [Theory]
+        [InlineData(new string[] { "H2" }, null)]
+        public void GetFourOfAKind_ReturnsNull_WhenNoFourOfAKindIsGiven(
+            string[] givenCards,
+            List<FourOfAKind>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            Assert.Equal(expectedReturn, result);
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H2", "C2", "S2", "D2" },
+            new string[] { "H2", "C2", "S2", "D2" },
+            new int[] { 2 }
+        )]
+        public void GetFourOfAKind_ReturnsListOfFourOfAKind_HoldingOneFourOfAKind_WhenOneFourOfAKindIsGiven(
+            string[] givenCards,
+            string[] expectedCards,
+            int[] expectedValues)
+        {
+            // Arrange
+            FourOfAKind expectedFourOfAKind = new(
+                new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                });
+
+            List<FourOfAKind>? listOfExpectedFourOfAKind = new()
+            {
+                expectedFourOfAKind
+            };
+
+            var expectedReturn = listOfExpectedFourOfAKind;
+
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            for (int i = 0; i < listOfExpectedFourOfAKind.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H3", "C3", "SA", "S3", "DA", "D3" },
+            new string[] { "H3", "C3", "S3", "D3" },
+            new int[] { 3 }
+        )]
+        public void GetFourOfAKind_ReturnsListOfFourOfAKind_HoldingOneFourOfAKind_WhenCardsIncludingOneThreeOfAKindAreGiven(
+            string[] givenCards,
+            string[] expectedCards,
+            int[] expectedValues)
+        {
+            // Arrange
+            FourOfAKind expectedFourOfAKind = new(
+                new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                });
+
+            List<FourOfAKind>? listOfExpectedFourOfAKind = new()
+            {
+                expectedFourOfAKind
+            };
+
+            var expectedReturn = listOfExpectedFourOfAKind;
+
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            for (int i = 0; i < listOfExpectedFourOfAKind.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
+        }
+
+        [Theory]
+        [InlineData(new string[] { "H2", "C8", "SA", "D3" }, null)]
+        public void GetFourOfAKind_ReturnsNull_WhenCardsWithoutOneFourOfAKindAreGiven(
+            string[] givenCards,
+            List<FourOfAKind>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            Assert.Equal(expectedReturn, result);
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H2", "C2", "S2", "HA", "SA", "DA", "D2", "CA" },
+            new string[] { "H2", "C2", "S2", "D2", "HA", "SA", "DA", "CA" },
+            new int[] { 2, 14 }
+        )]
+        public void GetFourOfAKind_ReturnsListOfFourOfAKind_HoldingTwoFourOfAKind_WhenTwoFourOfAKindAreGiven(
+            string[] givenCards,
+            string[] expectedCards,
+            int[] expectedValues)
+        {
+            // Arrange
+            FourOfAKind expectedFourOfAKind1 = new(
+                new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                });
+            FourOfAKind expectedFourOfAKind2 = new(
+                new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[7], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[6], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
+                });
+
+            List<FourOfAKind>? listOfExpectedFourOfAKind = new()
+            {
+                expectedFourOfAKind1,
+                expectedFourOfAKind2
+            };
+
+            var expectedReturn = listOfExpectedFourOfAKind;
+
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            for (int i = 0; i < listOfExpectedFourOfAKind.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H2", "H9", "SA", "C2", "D8", "DA", "S2", "HA", "D2", "CA" },
+            new string[] { "H2", "C2", "S2", "D2", "SA", "DA", "HA", "CA" },
+            new int[] { 2, 14 }
+        )]
+        public void GetFourOfAKind_ReturnsListOfFourOfAKind_HoldingTwoFourOfAKind_WhenCardsIncludingTwoFourOfAKindAreGiven(
+            string[] givenCards,
+            string[] expectedCards,
+            int[] expectedValues)
+        {
+            // Arrange
+            FourOfAKind expectedFourOfAKind1 = new(
+                new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                });
+            FourOfAKind expectedFourOfAKind2 = new(
+                new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[7], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[6], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1])
+                });
+
+            List<FourOfAKind>? listOfExpectedFourOfAKind = new()
+            {
+                expectedFourOfAKind1,
+                expectedFourOfAKind2
+            };
+
+            var expectedReturn = listOfExpectedFourOfAKind;
+
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFourOfAKind();
+
+            // Assert
+            for (int i = 0; i < listOfExpectedFourOfAKind.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
+        }
     }
 }
