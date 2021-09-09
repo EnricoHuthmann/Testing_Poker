@@ -101,7 +101,7 @@ namespace Testing_Poker
                     {
                         if (cardSetArray[i].Value != cardSetArray[k].Value) continue;
 
-                        for (int l = i + 1; l < j; l++)
+                        for (int l = i + 1; l < k; l++)
                         {
                             if (cardSetArray[i].Value != cardSetArray[l].Value) continue;
                             

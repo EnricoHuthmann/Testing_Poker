@@ -1050,10 +1050,10 @@ namespace Testing_Poker.Tests
                 });
             FourOfAKind expectedFourOfAKind2 = new(
                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
                     new KeyValuePair<string, int>(expectedCards[7], expectedValues[1]),
                     new KeyValuePair<string, int>(expectedCards[6], expectedValues[1]),
-                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1]),
-                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1])
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
                 });
 
             List<FourOfAKind>? listOfExpectedFourOfAKind = new()
