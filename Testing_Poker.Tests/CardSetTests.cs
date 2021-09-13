@@ -14,7 +14,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { }, null)]
         public void GetPairs_ReturnsNull_WhenNoCardsAreGiven(
             string[] givenCards,
-            List<Pair>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -30,7 +30,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "" }, null)]
         public void GetPairs_ReturnsNull_WhenAnEmptyCardIsGiven(
             string[] givenCards,
-            List<Pair>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -46,7 +46,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "", "" }, null)]
         public void GetPairs_ReturnsNull_WhenDuplicateEmptyCardsAreGiven(
             string[] givenCards,
-            List<Pair>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -62,7 +62,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "   " }, null)]
         public void GetPairs_ReturnsNull_WhenAWhitespaceCardIsGiven(
             string[] givenCards,
-            List<Pair>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -78,7 +78,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "   ", "   " }, null)]
         public void GetPairs_ReturnsNull_WhenDuplicateWhitespaceCardsAreGiven(
             string[] givenCards,
-            List<Pair>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -94,7 +94,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "Not a Card" }, null)]
         public void GetPairs_ReturnsNull_WhenNonsenseIsGiven(
             string[] givenCards,
-            List<Pair>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -110,7 +110,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "Not a Card", "Not a Card" }, null)]
         public void GetPairs_ReturnsNull_WhenDuplicateNonsenseIsGiven(
             string[] givenCards,
-            List<Pair>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -126,7 +126,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "H2" }, null)]
         public void GetPairs_ReturnsNull_WhenNoPairIsGiven(
             string[] givenCards,
-            List<Pair>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -150,13 +150,13 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            Pair expectedPair = new(
+            Multiple expectedPair = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[1])
                 });
 
-            List<Pair>? listOfExpectedPairs = new()
+            List<Multiple>? listOfExpectedPairs = new()
             {
                 expectedPair
             };
@@ -188,13 +188,13 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            Pair expectedPair = new(
+            Multiple expectedPair = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[1])
                 });
 
-            List<Pair>? listOfExpectedPairs = new()
+            List<Multiple>? listOfExpectedPairs = new()
             {
                 expectedPair
             };
@@ -218,7 +218,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "H2", "C8", "SA" }, null)]
         public void GetPairs_ReturnsNull_WhenCardsWithoutOnePairAreGiven(
             string[] givenCards,
-            List<Pair>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -242,18 +242,18 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            Pair expectedPair1 = new(
+            Multiple expectedPair1 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[1])
                 });
-            Pair expectedPair2 = new(
+            Multiple expectedPair2 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[2]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[3])
                 });
 
-            List<Pair>? listOfExpectedPairs = new()
+            List<Multiple>? listOfExpectedPairs = new()
             {
                 expectedPair1,
                 expectedPair2
@@ -286,18 +286,18 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            Pair expectedPair1 = new(
+            Multiple expectedPair1 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[1])
                 });
-            Pair expectedPair2 = new(
+            Multiple expectedPair2 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[2]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[3])
                 });
 
-            List<Pair>? listOfExpectedPairs = new()
+            List<Multiple>? listOfExpectedPairs = new()
             {
                 expectedPair1,
                 expectedPair2
@@ -330,26 +330,26 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            Pair expectedPair1 = new(
+            Multiple expectedPair1 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
                 }
             );
-            Pair expectedPair2 = new(
+            Multiple expectedPair2 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 }
             );
-            Pair expectedPair3 = new(
+            Multiple expectedPair3 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
                 }
             );
 
-            List<Pair>? listOfExpectedPairs = new()
+            List<Multiple>? listOfExpectedPairs = new()
             {
                 expectedPair1,
                 expectedPair2,
@@ -379,7 +379,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { }, null)]
         public void GetThreeOfAKind_ReturnsNull_WhenNoCardsAreGiven(
             string[] givenCards,
-            List<ThreeOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -395,7 +395,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "" }, null)]
         public void GetThreeOfAKind_ReturnsNull_WhenAnEmptyCardIsGiven(
             string[] givenCards,
-            List<ThreeOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -411,7 +411,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "", "", "" }, null)]
         public void GetThreeOfAKind_ReturnsNull_WhenMultipleEmptyCardsAreGiven(
             string[] givenCards,
-            List<ThreeOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -427,7 +427,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "   " }, null)]
         public void GetThreeOfAKind_ReturnsNull_WhenAWhitespaceCardIsGiven(
             string[] givenCards,
-            List<ThreeOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -443,7 +443,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "   ", "   ", "   " }, null)]
         public void GetThreeOfAKind_ReturnsNull_WhenMultipleWhitespaceCardsAreGiven(
             string[] givenCards,
-            List<ThreeOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -459,7 +459,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "Not a Card" }, null)]
         public void GetThreeOfAKind_ReturnsNull_WhenNonsenseIsGiven(
             string[] givenCards,
-            List<ThreeOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -475,7 +475,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "Not a Card", "Not a Card", "Not a Card" }, null)]
         public void GetThreeOfAKind_ReturnsNull_WhenMultipleNonsenseIsGiven(
             string[] givenCards,
-            List<ThreeOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -491,7 +491,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "H2" }, null)]
         public void GetThreeOfAKind_ReturnsNull_WhenNoThreeOfAKindIsGiven(
             string[] givenCards,
-            List<ThreeOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -515,14 +515,14 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            ThreeOfAKind expectedThreeOfAKind = new(
+            Multiple expectedThreeOfAKind = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 });
 
-            List<ThreeOfAKind>? listOfExpectedThreeOfAKind = new()
+            List<Multiple>? listOfExpectedThreeOfAKind = new()
             {
                 expectedThreeOfAKind
             };
@@ -554,14 +554,14 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            ThreeOfAKind expectedThreeOfAKind = new(
+            Multiple expectedThreeOfAKind = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 });
 
-            List<ThreeOfAKind>? listOfExpectedThreeOfAKind = new()
+            List<Multiple>? listOfExpectedThreeOfAKind = new()
             {
                 expectedThreeOfAKind
             };
@@ -585,7 +585,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "H2", "C8", "SA" }, null)]
         public void GetThreeOfAKind_ReturnsNull_WhenCardsWithoutOneThreeOfAKindAreGiven(
             string[] givenCards,
-            List<ThreeOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -609,20 +609,20 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            ThreeOfAKind expectedThreeOfAKind1 = new(
+            Multiple expectedThreeOfAKind1 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 });
-            ThreeOfAKind expectedThreeOfAKind2 = new(
+            Multiple expectedThreeOfAKind2 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[1]),
                     new KeyValuePair<string, int>(expectedCards[5], expectedValues[1]),
                     new KeyValuePair<string, int>(expectedCards[4], expectedValues[1])
                 });
 
-            List<ThreeOfAKind>? listOfExpectedThreeOfAKind = new()
+            List<Multiple>? listOfExpectedThreeOfAKind = new()
             {
                 expectedThreeOfAKind1,
                 expectedThreeOfAKind2
@@ -655,20 +655,20 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            ThreeOfAKind expectedThreeOfAKind1 = new(
+            Multiple expectedThreeOfAKind1 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 });
-            ThreeOfAKind expectedThreeOfAKind2 = new(
+            Multiple expectedThreeOfAKind2 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[1]),
                     new KeyValuePair<string, int>(expectedCards[5], expectedValues[1]),
                     new KeyValuePair<string, int>(expectedCards[4], expectedValues[1])
                 });
 
-            List<ThreeOfAKind>? listOfExpectedThreeOfAKind = new()
+            List<Multiple>? listOfExpectedThreeOfAKind = new()
             {
                 expectedThreeOfAKind1,
                 expectedThreeOfAKind2
@@ -701,28 +701,28 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            ThreeOfAKind expectedThreeOfAKind1 = new(
+            Multiple expectedThreeOfAKind1 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 }
             );
-            ThreeOfAKind expectedThreeOfAKind2 = new(
+            Multiple expectedThreeOfAKind2 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
                 }
             );
-            ThreeOfAKind expectedThreeOfAKind3 = new(
+            Multiple expectedThreeOfAKind3 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 }
             );
-            ThreeOfAKind expectedThreeOfAKind4 = new(
+            Multiple expectedThreeOfAKind4 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
@@ -730,7 +730,7 @@ namespace Testing_Poker.Tests
                 }
             );
 
-            List<ThreeOfAKind>? listOfExpectedThreeOfAKind = new()
+            List<Multiple>? listOfExpectedThreeOfAKind = new()
             {
                 expectedThreeOfAKind1,
                 expectedThreeOfAKind2,
@@ -761,7 +761,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { }, null)]
         public void GetFourOfAKind_ReturnsNull_WhenNoCardsAreGiven(
             string[] givenCards,
-            List<FourOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -777,7 +777,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "" }, null)]
         public void GetFourOfAKind_ReturnsNull_WhenAnEmptyCardIsGiven(
             string[] givenCards,
-            List<FourOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -793,7 +793,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "", "", "", "" }, null)]
         public void GetFourOfAKind_ReturnsNull_WhenMultipleEmptyCardsAreGiven(
             string[] givenCards,
-            List<FourOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -809,7 +809,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "   " }, null)]
         public void GetFourOfAKind_ReturnsNull_WhenAWhitespaceCardIsGiven(
             string[] givenCards,
-            List<FourOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -825,7 +825,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "   ", "   ", "   ", "   " }, null)]
         public void GetFourOfAKind_ReturnsNull_WhenMultipleWhitespaceCardsAreGiven(
             string[] givenCards,
-            List<FourOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -841,7 +841,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "Not a Card" }, null)]
         public void GetFourOfAKind_ReturnsNull_WhenNonsenseIsGiven(
             string[] givenCards,
-            List<FourOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -857,7 +857,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "Not a Card", "Not a Card", "Not a Card", "Not a Card" }, null)]
         public void GetFourOfAKind_ReturnsNull_WhenMultipleNonsenseIsGiven(
             string[] givenCards,
-            List<FourOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -873,7 +873,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "H2" }, null)]
         public void GetFourOfAKind_ReturnsNull_WhenNoFourOfAKindIsGiven(
             string[] givenCards,
-            List<FourOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -897,7 +897,7 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            FourOfAKind expectedFourOfAKind = new(
+            Multiple expectedFourOfAKind = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
@@ -905,7 +905,7 @@ namespace Testing_Poker.Tests
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 });
 
-            List<FourOfAKind>? listOfExpectedFourOfAKind = new()
+            List<Multiple>? listOfExpectedFourOfAKind = new()
             {
                 expectedFourOfAKind
             };
@@ -937,7 +937,7 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            FourOfAKind expectedFourOfAKind = new(
+            Multiple expectedFourOfAKind = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
@@ -945,7 +945,7 @@ namespace Testing_Poker.Tests
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 });
 
-            List<FourOfAKind>? listOfExpectedFourOfAKind = new()
+            List<Multiple>? listOfExpectedFourOfAKind = new()
             {
                 expectedFourOfAKind
             };
@@ -969,7 +969,7 @@ namespace Testing_Poker.Tests
         [InlineData(new string[] { "H2", "C8", "SA", "D3" }, null)]
         public void GetFourOfAKind_ReturnsNull_WhenCardsWithoutOneFourOfAKindAreGiven(
             string[] givenCards,
-            List<FourOfAKind>? expectedReturn)
+            List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -993,14 +993,14 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            FourOfAKind expectedFourOfAKind1 = new(
+            Multiple expectedFourOfAKind1 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 });
-            FourOfAKind expectedFourOfAKind2 = new(
+            Multiple expectedFourOfAKind2 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
                     new KeyValuePair<string, int>(expectedCards[7], expectedValues[1]),
@@ -1008,7 +1008,7 @@ namespace Testing_Poker.Tests
                     new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
                 });
 
-            List<FourOfAKind>? listOfExpectedFourOfAKind = new()
+            List<Multiple>? listOfExpectedFourOfAKind = new()
             {
                 expectedFourOfAKind1,
                 expectedFourOfAKind2
@@ -1041,14 +1041,14 @@ namespace Testing_Poker.Tests
             int[] expectedValues)
         {
             // Arrange
-            FourOfAKind expectedFourOfAKind1 = new(
+            Multiple expectedFourOfAKind1 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
                     new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
                 });
-            FourOfAKind expectedFourOfAKind2 = new(
+            Multiple expectedFourOfAKind2 = new(
                 new HashSet<KeyValuePair<string, int>> {
                     new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
                     new KeyValuePair<string, int>(expectedCards[7], expectedValues[1]),
@@ -1056,7 +1056,7 @@ namespace Testing_Poker.Tests
                     new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
                 });
 
-            List<FourOfAKind>? listOfExpectedFourOfAKind = new()
+            List<Multiple>? listOfExpectedFourOfAKind = new()
             {
                 expectedFourOfAKind1,
                 expectedFourOfAKind2
@@ -1076,5 +1076,23 @@ namespace Testing_Poker.Tests
                 Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
             }
         }
-    }
+
+        //
+        // Multiples Tests
+        //
+
+        [Theory]
+        [InlineData(new string[] { }, null)]
+        public void GetMultiples(string[] givenCards, List<Multiple>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            //var result = sut.GetMultiples();
+
+            // Assert
+            //Assert.Equal(result, expectedReturn);
+        }
+    } 
 }

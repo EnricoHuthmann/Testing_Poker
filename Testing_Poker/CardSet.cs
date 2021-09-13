@@ -24,11 +24,11 @@ namespace Testing_Poker
             }
         }
 
-        public List<Pair>? GetPairs()
+        public List<Multiple>? GetPairs()
         {
             if (cardSet == null) return null;
 
-            List<Pair>? pairs = null;
+            List<Multiple>? pairs = null;
 
             var cardSetArray = cardSet.ToArray();
 
@@ -42,18 +42,18 @@ namespace Testing_Poker
                         {
                             pairs = new();
                         }
-                        pairs.Add(new Pair(new HashSet<KeyValuePair<string, int>> { cardSetArray[i], cardSetArray[j] }));
+                        pairs.Add(new Multiple(new HashSet<KeyValuePair<string, int>> { cardSetArray[i], cardSetArray[j] }));
                     }
                 }
             }
             return pairs;
         }
 
-        public List<ThreeOfAKind>? GetThreeOfAKind()
+        public List<Multiple>? GetThreeOfAKind()
         {
             if (cardSet == null) return null;
 
-            List<ThreeOfAKind>? listOfThreeOfAKind = null;
+            List<Multiple>? listOfThreeOfAKind = null;
 
             var cardSetArray = cardSet.ToArray();
 
@@ -73,7 +73,7 @@ namespace Testing_Poker
                             {
                                 listOfThreeOfAKind = new();
                             }
-                            listOfThreeOfAKind.Add(new ThreeOfAKind(new HashSet<KeyValuePair<string, int>> { cardSetArray[i], cardSetArray[j], cardSetArray[k] }));
+                            listOfThreeOfAKind.Add(new Multiple(new HashSet<KeyValuePair<string, int>> { cardSetArray[i], cardSetArray[j], cardSetArray[k] }));
                         }
                     }
                 }
@@ -81,11 +81,11 @@ namespace Testing_Poker
             return listOfThreeOfAKind;
         }
 
-        public List<FourOfAKind>? GetFourOfAKind()
+        public List<Multiple>? GetFourOfAKind()
         {
             if (cardSet == null) return null;
 
-            List<FourOfAKind>? listOfFourOfAKind = null;
+            List<Multiple>? listOfFourOfAKind = null;
 
             var cardSetArray = cardSet.ToArray();
 
@@ -110,7 +110,7 @@ namespace Testing_Poker
                                 listOfFourOfAKind = new();
                             }
                             listOfFourOfAKind.Add(
-                                new FourOfAKind(
+                                new Multiple(
                                     new HashSet<KeyValuePair<string, int>>
                                     {
                                         cardSetArray[i],

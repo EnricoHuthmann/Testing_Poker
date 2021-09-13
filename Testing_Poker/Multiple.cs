@@ -3,16 +3,13 @@ using System.Collections.Generic;
 
 namespace Testing_Poker
 {
-    public class FourOfAKind
+    public class Multiple
     {
         private HashSet<KeyValuePair<string, int>>? hashSetOfCards;
 
-        public FourOfAKind(HashSet<KeyValuePair<string, int>> hashSet)
+        public Multiple(HashSet<KeyValuePair<string, int>> hashSet)
         {
-            if (hashSet.Count == 4)
-            {
-                this.hashSetOfCards = hashSet;
-            }
+            this.hashSetOfCards = hashSet;
         }
 
         public List<KeyValuePair<string, int>>? GetCards()
@@ -30,14 +27,14 @@ namespace Testing_Poker
 
         public int? GetValue()
         {
-            if (hashSetOfCards != null)
+            if (hashSetOfCards == null) return null;
+
+            var value = 0;
+            foreach (var keyValuePair in hashSetOfCards)
             {
-                foreach (var keyValuePair in hashSetOfCards)
-                {
-                    return keyValuePair.Value * 4;
-                }
+                value += keyValuePair.Value;
             }
-            return null;
+            return value;
         }
     }
 }
