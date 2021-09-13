@@ -1083,16 +1083,214 @@ namespace Testing_Poker.Tests
 
         [Theory]
         [InlineData(new string[] { }, null)]
-        public void GetMultiples(string[] givenCards, List<Multiple>? expectedReturn)
+        public void GetMultiples_ReturnsNull_WhenNoCardsAreGiven(string[] givenCards, List<Multiple>? expectedReturn)
         {
             // Arrange
             var sut = new CardSet(givenCards);
 
             // Act
-            //var result = sut.GetMultiples();
+            var result = sut.GetMultiples();
 
             // Assert
-            //Assert.Equal(result, expectedReturn);
+            Assert.Equal(result, expectedReturn);
+        }
+
+        [Theory]
+        [InlineData(new string[] { "H2", "C3", "CA" }, null)]
+        public void GetMultiples_ReturnsNull_WhenNoPairIsGiven(string[] givenCards, List<Multiple>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetMultiples();
+
+            // Assert
+            Assert.Equal(result, expectedReturn);
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H2", "C2", "CA" },
+            new string[] { "H2", "C2" },
+            new int[] { 2 }
+        )]
+        public void GetMultiples_ReturnsListOfMultiples_WhenAPairIsGiven(string[] givenCards, string[] expectedCards, int[] expectedValues)
+        {
+            // Arrange
+            Multiple expectedPair = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                 });
+
+            List<Multiple> expectedReturn = new()
+            {
+                expectedPair
+            };
+
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetMultiples();
+
+            // Assert
+            for (int i = 0; i < expectedReturn.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H2", "C2", "D2", "SA" },
+            new string[] { "H2", "C2", "D2" },
+            new int[] { 2 }
+        )]
+        public void GetMultiples_ReturnsListOfMultiples_WhenAThreeOfAKindIsGiven(string[] givenCards, string[] expectedCards, int[] expectedValues)
+        {
+            // Arrange
+            Multiple expectedThreeOfAKind = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                 });
+            Multiple expectedPair1 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
+                 });
+            Multiple expectedPair2 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                 });
+            Multiple expectedPair3 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
+                 });
+
+            List<Multiple> expectedReturn = new()
+            {
+                expectedThreeOfAKind,
+                expectedPair1,
+                expectedPair2,
+                expectedPair3
+            };
+
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetMultiples();
+
+            // Assert
+            for (int i = 0; i < expectedReturn.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H2", "C2", "D2", "SA", "S2" },
+            new string[] { "H2", "C2", "D2", "S2" },
+            new int[] { 2 }
+        )]
+        public void GetMultiples_ReturnsListOfMultiples_WhenAFourOfAKindIsGiven(string[] givenCards, string[] expectedCards, int[] expectedValues)
+        {
+            // Arrange
+            Multiple expectedFourOfAKind = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                 });
+            Multiple expectedThreeOfAKind1 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                 });
+            Multiple expectedThreeOfAKind2 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
+                 });
+            Multiple expectedThreeOfAKind3 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                 });
+            Multiple expectedThreeOfAKind4 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
+                 });
+            Multiple expectedPair1 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0])
+                 });
+            Multiple expectedPair2 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
+                 });
+            Multiple expectedPair3 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                 });
+            Multiple expectedPair4 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0])
+                 });
+            Multiple expectedPair5 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
+                 });
+            Multiple expectedPair6 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[0])
+                 });
+
+            List<Multiple> expectedReturn = new()
+            {
+                expectedFourOfAKind,
+                expectedThreeOfAKind1,
+                expectedThreeOfAKind2,
+                expectedThreeOfAKind3,
+                expectedThreeOfAKind4,
+                expectedPair1,
+                expectedPair2,
+                expectedPair3,
+                expectedPair4,
+                expectedPair5,
+                expectedPair6
+            };
+
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetMultiples();
+
+            // Assert
+            for (int i = 0; i < expectedReturn.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
         }
     } 
 }

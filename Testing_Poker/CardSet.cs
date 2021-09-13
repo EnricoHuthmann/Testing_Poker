@@ -126,5 +126,34 @@ namespace Testing_Poker
             }
             return listOfFourOfAKind;
         }
+
+        public List<Multiple>? GetMultiples()
+        {
+            if (cardSet == null) return null;
+
+            var fourOfAKinds = GetFourOfAKind();
+
+            var threeOfAKinds = GetThreeOfAKind();
+
+            var pairs = GetPairs();
+
+            List<Multiple>? listOfMultiples = null;
+            if (fourOfAKinds != null) {
+                listOfMultiples ??= new();
+                listOfMultiples.AddRange(fourOfAKinds);
+            }
+            if (threeOfAKinds != null)
+            {
+                listOfMultiples ??= new();
+                listOfMultiples.AddRange(threeOfAKinds);
+            }
+            if (pairs != null)
+            {
+                listOfMultiples ??= new();
+                listOfMultiples.AddRange(pairs);
+            }
+
+            return listOfMultiples;
+        }
     }
 }
