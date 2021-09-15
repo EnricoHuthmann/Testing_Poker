@@ -1292,5 +1292,92 @@ namespace Testing_Poker.Tests
                 Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
             }
         }
-    } 
+
+        //
+        // FullHouse Tests
+        //
+
+        [Theory]
+        [InlineData(new string[] { }, null)]
+        public void GetFullHouse_ReturnsNull_WhenNoCardsAreGiven(string[] givenCards, List<FullHouse>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFullHouse();
+
+            // Assert
+            Assert.Equal(result, expectedReturn);
+        }
+
+        [Theory]
+        [InlineData(new string[] { "H2", "C3", "CA", "C2", "D2" }, null)]
+        public void GetFullHouse_ReturnsNull_WhenAThreeOfAKindIsGiven_ButNoExtraPairIsGiven(string[] givenCards, List<FullHouse>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFullHouse();
+
+            // Assert
+            Assert.Equal(result, expectedReturn);
+        }
+
+        [Theory]
+        [InlineData(new string[] { "H2", "C3", "CA", "D2" }, null)]
+        public void GetFullHouse_ReturnsNull_WhenAPairIsGiven_ButNoExtraThreeOfAKindIsGiven(string[] givenCards, List<FullHouse>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFullHouse();
+
+            // Assert
+            Assert.Equal(result, expectedReturn);
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H2", "C2", "CA", "D2", "DA" },
+            new string[] { "H2", "C2", "D2", "CA", "DA" },
+            new int[] { 2, 14 }
+        )]
+        public void GetFullHouse_ReturnsListOfFullHouses_WhenAFullHouseIsGiven(string[] givenCards, string[] expectedCards, int[] expectedValues)
+        {
+            // Arrange
+            Multiple expectedThreeOfAKind = new(
+                new HashSet<KeyValuePair<string, int>>
+                {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                });
+
+            Multiple expectedPair = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1])
+                 });
+
+            List<FullHouse> expectedReturn = new()
+            {
+                new FullHouse(expectedThreeOfAKind, expectedPair)
+            };
+
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFullHouse();
+
+            // Assert
+            for (int i = 0; i < expectedReturn.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
+        }
+    }
 }

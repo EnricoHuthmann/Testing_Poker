@@ -138,6 +138,7 @@ namespace Testing_Poker
             var pairs = GetPairs();
 
             List<Multiple>? listOfMultiples = null;
+
             if (fourOfAKinds != null) {
                 listOfMultiples ??= new();
                 listOfMultiples.AddRange(fourOfAKinds);
@@ -154,6 +155,34 @@ namespace Testing_Poker
             }
 
             return listOfMultiples;
+        }
+
+        public List<FullHouse>? GetFullHouse()
+        {
+            if (cardSet == null) return null;
+
+            var threeOfAKinds = GetThreeOfAKind();
+
+            var pairs = GetPairs();
+
+            List<FullHouse>? listOfFullHouses = null;
+
+            if (threeOfAKinds != null && pairs != null)
+            {
+                foreach (var card in threeOfAKinds)
+                {
+                    if (card == pairs[0] && card == pairs[1])
+                    {
+                        continue;
+                    }
+
+
+
+
+                }
+            }
+
+            return listOfFullHouses;
         }
     }
 }
