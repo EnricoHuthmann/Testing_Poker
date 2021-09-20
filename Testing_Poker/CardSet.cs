@@ -169,16 +169,25 @@ namespace Testing_Poker
 
             if (threeOfAKinds != null && pairs != null)
             {
-                foreach (var card in threeOfAKinds)
+                foreach (var threeOfAKind in threeOfAKinds)
                 {
-                    if (card == pairs[0] && card == pairs[1])
+                    var threeOfAKindCards = threeOfAKind.GetCards();
+
+                    if (threeOfAKindCards == null) continue;
+
+                    foreach (var pair in pairs)
                     {
-                        continue;
+                        var pairCards = pair.GetCards();
+
+                        if (pairCards == null) continue;
+
+                        if (threeOfAKindCards[0].Value == pairCards[0].Value) continue;
+
+                        FullHouse fullHouse = new(threeOfAKind, pair);
+
+                        listOfFullHouses ??= new();
+                        listOfFullHouses.Add(fullHouse);
                     }
-
-
-
-
                 }
             }
 

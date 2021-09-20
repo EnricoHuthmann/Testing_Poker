@@ -10,11 +10,13 @@ namespace Testing_Poker
 
         public FullHouse(Multiple threeOfAKind, Multiple pair)
         {
+            if (threeOfAKind.GetCards().Count != 3 && pair.GetCards().Count != 2) return;
+
             this.threeOfAKind = threeOfAKind;
             this.pair = pair;
         }
 
-        public List<Multiple>? GetCards()
+        public List<Multiple>? GetMultiples()
         {
             if (threeOfAKind == null || pair == null) return null;
 

@@ -1375,7 +1375,99 @@ namespace Testing_Poker.Tests
             // Assert
             for (int i = 0; i < expectedReturn.Count; i++)
             {
-                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetMultiples()[0].GetCards(), result[i].GetMultiples()[0].GetCards());
+                Assert.Equal(expectedReturn[i].GetMultiples()[1].GetCards(), result[i].GetMultiples()[1].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H2", "C2", "CA", "D2", "DA", "HA", "C5", "D5"},
+            new string[] { "H2", "C2", "D2", "CA", "DA", "HA", "C5", "D5"},
+            new int[] { 2, 14, 5 }
+        )]
+        public void GetFullHouse_ReturnsListOfFullHouses_WhenMultipleFullHousesAreGiven(string[] givenCards, string[] expectedCards, int[] expectedValues)
+        {
+            // Arrange
+            Multiple expectedThreeOfAKind1 = new(
+                new HashSet<KeyValuePair<string, int>>
+                {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                });
+
+            Multiple expectedThreeOfAKind2 = new(
+                new HashSet<KeyValuePair<string, int>>
+                {
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
+                });
+
+            Multiple expectedPair1 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
+                 });
+
+            Multiple expectedPair2 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1])
+                 });
+
+            Multiple expectedPair3 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
+                 });
+
+            Multiple expectedPair4 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[6], expectedValues[2]),
+                    new KeyValuePair<string, int>(expectedCards[7], expectedValues[2])
+                 });
+
+            Multiple expectedPair5 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
+                 });
+
+            Multiple expectedPair6 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
+                 });
+
+            List<FullHouse> expectedReturn = new()
+            {
+                new FullHouse(expectedThreeOfAKind1, expectedPair1),
+                new FullHouse(expectedThreeOfAKind1, expectedPair2),
+                new FullHouse(expectedThreeOfAKind1, expectedPair3),
+                new FullHouse(expectedThreeOfAKind1, expectedPair4),
+                new FullHouse(expectedThreeOfAKind1, expectedPair5),
+                new FullHouse(expectedThreeOfAKind1, expectedPair6),
+                new FullHouse(expectedThreeOfAKind2, expectedPair1),
+                new FullHouse(expectedThreeOfAKind2, expectedPair2),
+                new FullHouse(expectedThreeOfAKind2, expectedPair3),
+                new FullHouse(expectedThreeOfAKind2, expectedPair4),
+                new FullHouse(expectedThreeOfAKind2, expectedPair5),
+                new FullHouse(expectedThreeOfAKind2, expectedPair6)
+            };
+
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFullHouse();
+
+            // Assert
+            for (int i = 0; i < expectedReturn.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetMultiples()[0].GetCards(), result[i].GetMultiples()[0].GetCards());
+                Assert.Equal(expectedReturn[i].GetMultiples()[1].GetCards(), result[i].GetMultiples()[1].GetCards());
                 Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
             }
         }
