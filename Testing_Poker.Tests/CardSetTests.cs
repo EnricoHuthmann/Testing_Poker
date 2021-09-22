@@ -1312,6 +1312,20 @@ namespace Testing_Poker.Tests
         }
 
         [Theory]
+        [InlineData(new string[] { "H5", "C3", "CA", "C8", "D2" }, null)]
+        public void GetFullHouse_ReturnsNull_WhenACardsetWithoutMultiplesIsGiven(string[] givenCards, List<FullHouse>? expectedReturn)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            // Act
+            var result = sut.GetFullHouse();
+
+            // Assert
+            Assert.Equal(result, expectedReturn);
+        }
+
+        [Theory]
         [InlineData(new string[] { "H2", "C3", "CA", "C2", "D2" }, null)]
         public void GetFullHouse_ReturnsNull_WhenAThreeOfAKindIsGiven_ButNoExtraPairIsGiven(string[] givenCards, List<FullHouse>? expectedReturn)
         {
@@ -1402,8 +1416,8 @@ namespace Testing_Poker.Tests
                 new HashSet<KeyValuePair<string, int>>
                 {
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[1]),
-                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
-                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1])
                 });
 
             Multiple expectedPair1 = new(
@@ -1432,14 +1446,20 @@ namespace Testing_Poker.Tests
 
             Multiple expectedPair5 = new(
                  new HashSet<KeyValuePair<string, int>> {
-                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
-                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
                  });
 
             Multiple expectedPair6 = new(
                  new HashSet<KeyValuePair<string, int>> {
-                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[1]),
-                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[1])
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0])
+                 });
+
+            Multiple expectedPair7 = new(
+                 new HashSet<KeyValuePair<string, int>> {
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[0])
                  });
 
             List<FullHouse> expectedReturn = new()
@@ -1448,14 +1468,10 @@ namespace Testing_Poker.Tests
                 new FullHouse(expectedThreeOfAKind1, expectedPair2),
                 new FullHouse(expectedThreeOfAKind1, expectedPair3),
                 new FullHouse(expectedThreeOfAKind1, expectedPair4),
-                new FullHouse(expectedThreeOfAKind1, expectedPair5),
-                new FullHouse(expectedThreeOfAKind1, expectedPair6),
-                new FullHouse(expectedThreeOfAKind2, expectedPair1),
-                new FullHouse(expectedThreeOfAKind2, expectedPair2),
-                new FullHouse(expectedThreeOfAKind2, expectedPair3),
-                new FullHouse(expectedThreeOfAKind2, expectedPair4),
                 new FullHouse(expectedThreeOfAKind2, expectedPair5),
-                new FullHouse(expectedThreeOfAKind2, expectedPair6)
+                new FullHouse(expectedThreeOfAKind2, expectedPair6),
+                new FullHouse(expectedThreeOfAKind2, expectedPair7),
+                new FullHouse(expectedThreeOfAKind2, expectedPair4)
             };
 
             var sut = new CardSet(givenCards);
