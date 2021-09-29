@@ -1540,7 +1540,7 @@ namespace Testing_Poker.Tests
             new string[] { "C2", "H3", "H4", "D5", "S6", "H7" },
             new int[] { 2, 3, 4, 5, 6, 7 }
         )]
-        public void GetStraights_ReturnsAListOfStraights_WhenACardsetWithAStraightIsGiven(string[] givenCards, string[] expectedCards, int[] expectedValues)
+        public void GetStraights_ReturnsAListOfStraights_WhenACardsetWithStraightsIsGiven(string[] givenCards, string[] expectedCards, int[] expectedValues)
         {
             // Arrange
             var sut = new CardSet(givenCards);
@@ -1568,6 +1568,80 @@ namespace Testing_Poker.Tests
             );
 
             List<Straight> expectedReturn = new() { expectedStraight1, expectedStraight2 };
+
+            // Act
+            var result = sut.GetStraights();
+
+            // Assert
+            for (int i = 0; i < expectedReturn.Count; i++)
+            {
+                Assert.Equal(expectedReturn[i].GetCards(), result[i].GetCards());
+                Assert.Equal(expectedReturn[i].GetValue(), result[i].GetValue());
+            }
+        }
+
+        [Theory]
+        [InlineData(
+            new string[] { "H3", "H4", "D5", "S6", "H7", "H9", "C2", "S2", "S7" },
+            new string[] { "C2", "S2", "H3", "H4", "D5", "S6", "H7", "S7" },
+            new int[] { 2, 3, 4, 5, 6, 7 }
+        )]
+        public void GetStraights_ReturnsAListOfStraights_WhenACardsetWithStraights_AndMultipleSameValueCardsIsGiven(string[] givenCards, string[] expectedCards, int[] expectedValues)
+        {
+            // Arrange
+            var sut = new CardSet(givenCards);
+
+            Straight expectedStraight1 = new(
+                new HashSet<KeyValuePair<string, int>>
+                {
+                    new KeyValuePair<string, int>(expectedCards[0], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[2]),
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[3]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[4])
+                }
+            );
+
+            Straight expectedStraight2 = new(
+                new HashSet<KeyValuePair<string, int>>
+                {
+                    new KeyValuePair<string, int>(expectedCards[1], expectedValues[0]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[2]),
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[3]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[4])
+                }
+            );
+
+            Straight expectedStraight3 = new(
+                new HashSet<KeyValuePair<string, int>>
+                {
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[2]),
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[3]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[4]),
+                    new KeyValuePair<string, int>(expectedCards[6], expectedValues[5])
+                }
+            );
+
+            Straight expectedStraight4 = new(
+                new HashSet<KeyValuePair<string, int>>
+                {
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[2]),
+                    new KeyValuePair<string, int>(expectedCards[4], expectedValues[3]),
+                    new KeyValuePair<string, int>(expectedCards[5], expectedValues[4]),
+                    new KeyValuePair<string, int>(expectedCards[7], expectedValues[5])
+                }
+            );
+
+            List<Straight> expectedReturn = new()
+                {
+                    expectedStraight1,
+                    expectedStraight2,
+                    expectedStraight3,
+                    expectedStraight4
+                };
 
             // Act
             var result = sut.GetStraights();

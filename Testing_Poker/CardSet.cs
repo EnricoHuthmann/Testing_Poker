@@ -231,6 +231,7 @@ namespace Testing_Poker
                     }
 
                     // if there is more than one card with the value of the current card
+                    // NEEDS WORK; DOES NOT FUNCTION
                     if (tempValuesCount.Count >= 1)
                     {
                         tempValuesCount.Remove(card);
