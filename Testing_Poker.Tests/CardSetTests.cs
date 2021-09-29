@@ -1616,7 +1616,7 @@ namespace Testing_Poker.Tests
             Straight expectedStraight3 = new(
                 new HashSet<KeyValuePair<string, int>>
                 {
-                    new KeyValuePair<string, int>(expectedCards[3], expectedValues[1]),
+                    new KeyValuePair<string, int>(expectedCards[2], expectedValues[1]),
                     new KeyValuePair<string, int>(expectedCards[3], expectedValues[2]),
                     new KeyValuePair<string, int>(expectedCards[4], expectedValues[3]),
                     new KeyValuePair<string, int>(expectedCards[5], expectedValues[4]),

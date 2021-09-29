@@ -9,6 +9,8 @@ namespace Testing_Poker
 
         public Multiple(HashSet<KeyValuePair<string, int>> hashSet)
         {
+            if (hashSet.Count < 2) return;
+
             this.hashSetOfCards = hashSet;
         }
 
