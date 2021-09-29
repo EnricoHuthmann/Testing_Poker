@@ -193,5 +193,89 @@ namespace Testing_Poker
 
             return listOfFullHouses;
         }
+
+        public List<Straight>? GetStraights()
+        {
+            if (cardSet == null) return null;
+
+            if (cardSet.Count < 5) return null;
+
+            var sortedCardSet = cardSet.ToList().OrderBy(keyValuePair => keyValuePair.Value).ToList();
+
+            List<Straight>? straights = null;
+
+            for (int i = 0; i < sortedCardSet.Count - 4; i++)
+            {
+                List<List<KeyValuePair<string, int>>>? tempStraights = new();
+
+                var straightCards = sortedCardSet.Where(card => card.Value >= sortedCardSet[i].Value + 1 && card.Value <= sortedCardSet[i].Value + 4).ToList();
+
+                straightCards.Add(sortedCardSet[i]);
+
+                HashSet<int> tempValueSet = straightCards.Select(card => card.Value).ToHashSet();
+
+                if (tempValueSet.Count < 5) continue;
+
+                foreach (var card in straightCards)
+                {
+                    var tempValuesCount = straightCards.Where(c => c.Value == card.Value).ToList();
+
+                    if (tempStraights.Count == 0)
+                    {
+                        tempStraights.Add(new List<KeyValuePair<string, int>>());
+                    }
+
+                    foreach (var tempStraight in tempStraights)
+                    {
+                        tempStraight.Add(card);
+                    }
+
+                    // if there is more than one card with the value of the current card
+                    if (tempValuesCount.Count >= 1)
+                    {
+                        tempValuesCount.Remove(card);
+
+                        foreach (var multipleCard in tempValuesCount)
+                        {
+                            foreach (var tempStraight in tempStraights)
+                            {
+                                var tempCopy = new List<KeyValuePair<string, int>>();
+
+                                tempCopy.AddRange(tempStraight);
+
+                                tempCopy.Remove(card);
+                                tempCopy.Add(multipleCard);
+
+                                tempStraights.Add(tempCopy);
+                            }
+
+                            straightCards.Remove(multipleCard);
+                        }
+                    }
+                }
+                //create straights from the temporary lists
+                foreach (var straightList in tempStraights)
+                {
+                    var sortedStraightList = straightList.OrderBy(card => card.Value).ToList();
+
+                    straights ??= new();
+
+                    straights.Add(
+                        new Straight(
+                            new HashSet<KeyValuePair<string, int>>
+                            {
+                            sortedStraightList[0],
+                            sortedStraightList[1],
+                            sortedStraightList[2],
+                            sortedStraightList[3],
+                            sortedStraightList[4]
+                            }
+                        )
+                    );
+                }
+            }
+            
+            return straights;
+        }
     }
 }
